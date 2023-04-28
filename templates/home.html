@@ -4,13 +4,18 @@
 
   <h1>Pets</h1>
 {% for pet in pets %}
-{% if pet.available %}
   <div class="pet-info">
     <img src="{{pet.photo_url}}" alt="photo of {{pet.name}} the {{pet.species}}">
-    <caption>{{pet.name}} is <b>available</b>!</caption>
+    <caption>{{pet.name}} is<span>
+      {% if pet.available %}
+        <b>available</b>!
+      {% else %}
+        not available.
+      {% endif %}</span></caption>
   </div>
-{% endif %}
+
 {% endfor %}
 
   <a href="/add"><button>Add a Pet</button></a>
+
 {% endblock %}

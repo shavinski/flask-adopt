@@ -47,5 +47,5 @@ class Pet(db.Model):
         db.Boolean,
         nullable=False,
         default=True)
+        # why do we need default=True
 
-        

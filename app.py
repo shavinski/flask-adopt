@@ -32,7 +32,7 @@ def show_homepage():
 
     return render_template("home.html", pets=pets)
 
-@app.route('/add', methods=['GET', 'POST'])
+@app.route("/add", methods=['GET', 'POST'])
 def add_pet():
     """ Handles getting the add route and the form validation for adding a pet """
 
@@ -44,8 +44,9 @@ def add_pet():
         photo_url = form.photo_url.data or None
         age = form.age.data or None
         notes = form.notes.data or None
+        available = form.available.data
 
-        pet = Pet(name=name, species=species, photo_url=photo_url, age=age, notes=notes)
+        pet = Pet(name=name, species=species, photo_url=photo_url, age=age, notes=notes, available=available)
 
         db.session.add(pet)
         db.session.commit()
@@ -57,5 +58,9 @@ def add_pet():
         return render_template(
             "add-pet-form.html", form = form)
 
+@app.route("/<int:pet_id>/edit", methods=["GET", "POST"])
+def edit_pet_info(pet_id):
+    """Displays page of single pet and optional form to edit pet info"""
 
-    
+    pet = Pet.query.get_or_404(pet_id)
+
