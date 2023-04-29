@@ -3,12 +3,31 @@
 {% block content %}
 
 <h2>{{pet.name}}</h2>
+
 {% if pet.photo_url %}
 <img src="{{pet.photo_url}}" alt="photo of {{pet.name}} the {{pet.species}}">
 {% endif %}
 Age: {{pet.age}}
 Species: {{pet.species}}
+    
+<form id="edit-pet-form" method="POST">
+    {{ form.hidden_tag() }} <!--add type=hidden form fields -->
 
-<a href="/{{pet.id}}/edit"><button>Edit</button></a>
+    {% for field in form
+         if field.widget.input_type != 'hidden' %}
+
+    <p>
+      {{ field.label }}
+      {{ field }}
+
+      {% for error in field.errors %}
+        {{ error }}
+      {% endfor %}
+    </p>
+
+  {% endfor %}
+
+  <button type="submit">Edit</button>
+</form>
 
 {% endblock %}

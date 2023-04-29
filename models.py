@@ -16,6 +16,8 @@ def connect_db(app):
     db.init_app(app)
 
 class Pet(db.Model):
+    """Pet."""
+
     __tablename__ = "pets"
 
     id = db.Column(
@@ -28,7 +30,7 @@ class Pet(db.Model):
         nullable=False)
 
     species = db.Column(
-        db.String(30),
+        db.String(6),
         nullable=True)
 
     photo_url = db.Column(
@@ -41,7 +43,9 @@ class Pet(db.Model):
         nullable=False)
 
     notes = db.Column(
-        db.String(100))
+        db.Text,
+        nullable=False,
+        default='')
 
     available = db.Column(
         db.Boolean,

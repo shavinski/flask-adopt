@@ -5,10 +5,9 @@ from wtforms.validators import InputRequired, Optional, URL
 
 class AddPetForm(FlaskForm):
     """ Form for adding pets """
-
     name = StringField(
         "Pet name",
-        validators=[InputRequired()])
+        validators=[InputRequired()]) #FIXME: validate length of name
 
     species = SelectField(
         "Species",
@@ -33,25 +32,11 @@ class AddPetForm(FlaskForm):
 
 class EditPetForm(FlaskForm):
     """ Form for editing pet """
-
-    name = StringField(
-        "Pet name",
-        validators=[InputRequired()])
-
-    species = SelectField(
-        "Species",
-        choices = [('cat', 'Cat'), ('dog', 'Dog'), ('porcupine', 'Porcupine')],
-        validators=[InputRequired()])
-
     photo_url = StringField("Photo URL",
         validators=[Optional(), URL()])
-        #SHOULD WE HAVE OPTIONAL HERE OR JUST LEAVE IT OUT
-
-    age = SelectField(
-        "Age",
-        choices = [('baby', 'Baby'), ('young', 'Young'), ('adult', 'Adult'), ('senior', 'Senior')],
-        validators=[InputRequired()])
+        
+    available = BooleanField(
+        "Available")
 
     notes = StringField(
-        "Notes",
-        validators=[Optional()])
+        "Notes")
