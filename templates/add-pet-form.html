@@ -8,14 +8,14 @@
     {% for field in form
          if field.widget.input_type != 'hidden' %}
 
-    <p>
+    or %}
+    </p><p>
       {{ field.label }}
       {{ field }}
 
       {% for error in field.errors %}
         {{ error }}
-      {% endfor %}
-    </p>
+      {% endf
 
   {% endfor %}
 
